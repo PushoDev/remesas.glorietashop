@@ -19,6 +19,7 @@ class Remesa extends Model
         'direccion_beneficiario',
         'moneda_envio',
         'metodo_pago',
+        'monto_envio',
         'cantidad_recibir',
         'forma_entrega',
         'moneda_recibe',
@@ -30,6 +31,7 @@ class Remesa extends Model
 
     protected $casts = [
         'entregado' => 'boolean',
+        'monto_envio' => 'decimal:2',
         'cantidad_recibir' => 'decimal:2',
     ];
 

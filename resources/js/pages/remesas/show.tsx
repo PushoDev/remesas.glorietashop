@@ -17,6 +17,7 @@ export default function ShowRemesa({
         direccion_beneficiario: string | null;
         moneda_envio: string;
         metodo_pago: string;
+        monto_envio: string;
         cantidad_recibir: string;
         forma_entrega: string;
         moneda_recibe: string;
@@ -118,7 +119,7 @@ export default function ShowRemesa({
                     </div>
 
                     <div className="rounded-xl border border-sidebar-border/70 bg-card p-6 shadow-sm">
-                        <h3 className="mb-4 font-semibold">Pago</h3>
+                        <h3 className="mb-4 font-semibold">Pago del Cliente</h3>
                         <div className="flex flex-col gap-6">
                             <div>
                                 <span className="text-sm text-muted-foreground">
@@ -134,6 +135,14 @@ export default function ShowRemesa({
                                 </span>
                                 <p className="font-medium">
                                     {remesa.metodo_pago}
+                                </p>
+                            </div>
+                            <div>
+                                <span className="text-sm text-muted-foreground">
+                                    Monto que Paga:
+                                </span>
+                                <p className="text-xl font-bold">
+                                    {remesa.monto_envio} {remesa.moneda_envio}
                                 </p>
                             </div>
                         </div>

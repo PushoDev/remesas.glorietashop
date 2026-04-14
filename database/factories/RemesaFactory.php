@@ -25,6 +25,7 @@ class RemesaFactory extends Factory
             'direccion_beneficiario' => fake()->address(),
             'moneda_envio' => fake()->randomElement(['USD', 'EUR']),
             'metodo_pago' => fake()->randomElement(['Zelle', 'Visa', 'MasterCard', 'GooglePay', 'Paypal', 'Stripe', 'Otros']),
+            'monto_envio' => fake()->randomFloat(2, 50, 5000),
             'cantidad_recibir' => fake()->randomFloat(2, 50, 5000),
             'forma_entrega' => $formaEntrega,
             'moneda_recibe' => $formaEntrega === 'efectivo'

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Clients\ClientController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Mensajeros\MensajeroController;
 use App\Http\Controllers\Remesas\RemesaController;
 use Illuminate\Support\Facades\Route;
@@ -11,7 +12,7 @@ Route::inertia('/', 'welcome', [
 ])->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
+    Route::get('dashboard', DashboardController::class)->name('dashboard');
 
     Route::resource('clients', ClientController::class);
     Route::resource('mensajeros', MensajeroController::class);

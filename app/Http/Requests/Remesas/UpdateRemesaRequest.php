@@ -20,6 +20,7 @@ class UpdateRemesaRequest extends FormRequest
             'direccion_beneficiario' => ['nullable', 'string', 'max:500'],
             'moneda_envio' => ['required', 'in:USD,EUR'],
             'metodo_pago' => ['required', 'in:Zelle,Visa,MasterCard,GooglePay,Paypal,Stripe,Otros'],
+            'monto_envio' => ['required', 'numeric', 'min:0.01'],
             'cantidad_recibir' => ['required', 'numeric', 'min:0.01'],
             'forma_entrega' => ['required', 'in:efectivo,transferencia'],
             'moneda_recibe' => ['required', 'in:USD,MLC,CUP'],

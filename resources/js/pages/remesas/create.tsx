@@ -122,7 +122,7 @@ export default function CreateRemesa({
                     </div>
 
                     <div className="rounded-xl border border-sidebar-border/70 bg-card p-6 shadow-sm dark:border-sidebar-border">
-                        <h3 className="mb-4 font-semibold">Pago y Moneda</h3>
+                        <h3 className="mb-4 font-semibold">Pago del Cliente</h3>
                         <div className="space-y-4">
                             <div className="space-y-2">
                                 <label className="text-sm font-medium">
@@ -157,6 +157,20 @@ export default function CreateRemesa({
                                         </option>
                                     ))}
                                 </select>
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium">
+                                    Monto que Paga el Cliente
+                                </label>
+                                <input
+                                    type="number"
+                                    name="monto_envio"
+                                    step="0.01"
+                                    min="0.01"
+                                    placeholder="0.00"
+                                    required
+                                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                                />
                             </div>
                         </div>
                     </div>
