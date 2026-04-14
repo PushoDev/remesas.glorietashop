@@ -48,6 +48,8 @@ class MensajeroController extends Controller
     {
         Mensajero::create($request->validated());
 
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Mensajero creado exitosamente.']);
+
         return to_route('mensajeros.index');
     }
 
@@ -68,6 +70,8 @@ class MensajeroController extends Controller
     {
         $mensajero->update($request->validated());
 
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Mensajero actualizado exitosamente.']);
+
         return to_route('mensajeros.index');
     }
 
@@ -77,6 +81,8 @@ class MensajeroController extends Controller
     public function destroy(Mensajero $mensajero): RedirectResponse
     {
         $mensajero->delete();
+
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Mensajero eliminado exitosamente.']);
 
         return to_route('mensajeros.index');
     }

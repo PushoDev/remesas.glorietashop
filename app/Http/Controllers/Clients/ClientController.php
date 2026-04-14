@@ -48,6 +48,8 @@ class ClientController extends Controller
     {
         Client::create($request->validated());
 
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Cliente creado exitosamente.']);
+
         return to_route('clients.index');
     }
 
@@ -68,6 +70,8 @@ class ClientController extends Controller
     {
         $client->update($request->validated());
 
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Cliente actualizado exitosamente.']);
+
         return to_route('clients.index');
     }
 
@@ -77,6 +81,8 @@ class ClientController extends Controller
     public function destroy(Client $client): RedirectResponse
     {
         $client->delete();
+
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Cliente eliminado exitosamente.']);
 
         return to_route('clients.index');
     }

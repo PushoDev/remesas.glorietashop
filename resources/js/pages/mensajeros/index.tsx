@@ -1,17 +1,17 @@
 import { Head } from '@inertiajs/react';
-import { Search, User, Plus, Pencil, Trash2 } from 'lucide-react';
-import clients from '@/routes/clients';
+import { Search, Truck, Plus, Pencil, Trash2 } from 'lucide-react';
+import mensajeros from '@/routes/mensajeros';
 
-export default function ClientsIndex({
-    clients: clientList,
+export default function MensajerosIndex({
+    mensajeros: mensajeroList,
     filters,
 }: {
-    clients: {
+    mensajeros: {
         data: Array<{
             id: number;
             nombre: string;
             telefono: string;
-            direccion_residencia: string | null;
+            residencia: string | null;
         }>;
         links: Array<{ url: string | null; label: string; active: boolean }>;
         current_page: number;
@@ -23,33 +23,33 @@ export default function ClientsIndex({
 }) {
     return (
         <>
-            <Head title="Clientes" />
+            <Head title="Mensajeros" />
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
                 <div className="flex items-center justify-between gap-4">
                     <div className="flex items-center gap-3">
                         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                            <User className="h-5 w-5 text-primary" />
+                            <Truck className="h-5 w-5 text-primary" />
                         </div>
                         <div>
                             <h1 className="text-2xl font-bold tracking-tight">
-                                Clientes
+                                Mensajeros
                             </h1>
                             <p className="text-sm text-muted-foreground">
-                                {clientList.total} clientes registrados
+                                {mensajeroList.total} mensajeros registrados
                             </p>
                         </div>
                     </div>
                     <a
-                        href={clients.create().url}
+                        href={mensajeros.create().url}
                         className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
                     >
                         <Plus className="h-4 w-4" />
-                        Nuevo Cliente
+                        Nuevo Mensajero
                     </a>
                 </div>
 
                 <form
-                    action={clients.index().url}
+                    action={mensajeros.index().url}
                     method="get"
                     className="flex items-center gap-2"
                 >
@@ -66,37 +66,37 @@ export default function ClientsIndex({
                 </form>
 
                 <div className="grid flex-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {clientList.data.length === 0 ? (
+                    {mensajeroList.data.length === 0 ? (
                         <div className="relative col-span-full flex flex-1 flex-col items-center justify-center rounded-xl border border-dashed p-8 text-center">
-                            <User className="mb-4 h-12 w-12 text-muted-foreground" />
+                            <Truck className="mb-4 h-12 w-12 text-muted-foreground" />
                             <h3 className="mb-2 text-lg font-semibold">
-                                No hay clientes
+                                No hay mensajeros
                             </h3>
                             <p className="text-sm text-muted-foreground">
-                                Comienza agregando tu primer cliente.
+                                Comienza agregando tu primer mensajero.
                             </p>
                         </div>
                     ) : (
-                        clientList.data.map((client) => (
+                        mensajeroList.data.map((mensajero) => (
                             <div
-                                key={client.id}
+                                key={mensajero.id}
                                 className="relative overflow-hidden rounded-xl border border-sidebar-border/70 bg-card p-6 shadow-sm dark:border-sidebar-border"
                             >
                                 <div className="mb-4 flex items-start justify-between">
                                     <div className="flex items-center gap-3">
                                         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
                                             <span className="text-lg font-semibold text-primary">
-                                                {client.nombre
+                                                {mensajero.nombre
                                                     .charAt(0)
                                                     .toUpperCase()}
                                             </span>
                                         </div>
                                         <div>
                                             <h3 className="leading-none font-semibold">
-                                                {client.nombre}
+                                                {mensajero.nombre}
                                             </h3>
                                             <p className="mt-1 text-xs text-muted-foreground">
-                                                ID: {client.id}
+                                                ID: {mensajero.id}
                                             </p>
                                         </div>
                                     </div>
@@ -108,34 +108,36 @@ export default function ClientsIndex({
                                             Teléfono:
                                         </span>
                                         <span className="font-medium">
-                                            {client.telefono}
+                                            {mensajero.telefono}
                                         </span>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <span className="text-muted-foreground">
-                                            Dirección:
+                                            Residencia:
                                         </span>
                                         <span className="font-medium">
-                                            {client.direccion_residencia || '-'}
+                                            {mensajero.residencia || '-'}
                                         </span>
                                     </div>
                                 </div>
 
                                 <div className="mt-6 flex gap-2">
                                     <a
-                                        href={clients.edit(client).url}
+                                        href={mensajeros.edit(mensajero).url}
                                         className="flex flex-1 items-center justify-center gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground"
                                     >
                                         <Pencil className="h-4 w-4" />
                                         Editar
                                     </a>
                                     <form
-                                        action={clients.destroy(client).url}
+                                        action={
+                                            mensajeros.destroy(mensajero).url
+                                        }
                                         method="post"
                                         onSubmit={(e) => {
                                             if (
                                                 !confirm(
-                                                    '¿Eliminar este cliente?',
+                                                    '¿Eliminar este mensajero?',
                                                 )
                                             ) {
                                                 e.preventDefault();
@@ -160,9 +162,9 @@ export default function ClientsIndex({
                     )}
                 </div>
 
-                {clientList.last_page > 1 && (
+                {mensajeroList.last_page > 1 && (
                     <div className="flex items-center justify-center gap-1">
-                        {clientList.links.map((link, index) =>
+                        {mensajeroList.links.map((link, index) =>
                             link.url ? (
                                 <form
                                     key={index}
@@ -199,11 +201,11 @@ export default function ClientsIndex({
     );
 }
 
-ClientsIndex.layout = {
+MensajerosIndex.layout = {
     breadcrumbs: [
         {
-            title: 'Clientes',
-            href: clients.index().url,
+            title: 'Mensajeros',
+            href: mensajeros.index().url,
         },
     ],
 };
