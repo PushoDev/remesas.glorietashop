@@ -7,7 +7,11 @@ use App\Http\Controllers\Remesas\RemesaController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
-Route::inertia('/', 'welcome', [
+// Route::inertia('/', 'welcome', [
+//     'canRegister' => Features::enabled(Features::registration()),
+// ])->name('home');
+
+Route::inertia('/', 'login', [
     'canRegister' => Features::enabled(Features::registration()),
 ])->name('home');
 
@@ -20,4 +24,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('remesas/{remesa}/toggle-entregado', [RemesaController::class, 'toggleEntregado'])->name('remesas.toggle-entregado');
 });
 
-require __DIR__.'/settings.php';
+require __DIR__ . '/settings.php';
