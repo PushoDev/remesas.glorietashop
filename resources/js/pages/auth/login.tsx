@@ -98,10 +98,14 @@ export default function Login({
 
                         {canRegister && (
                             <div className="text-center text-sm text-muted-foreground">
-                                ¿No tienes una cuenta?{' '}
-                                <TextLink href={register()} tabIndex={5}>
-                                    Regístrate
+                                {/* ¿No tienes una cuenta?{' '} */}
+                                Proyecto de Agencia
+                                <TextLink href={'https://posglorietashop.com'} tabIndex={5}>
+                                    La GlorietaShop
                                 </TextLink>
+                                {/* <TextLink href={register()} tabIndex={5}>
+                                    Regístrate
+                                </TextLink> */}
                             </div>
                         )}
                     </>
