@@ -11,7 +11,7 @@ use Laravel\Fortify\Features;
 //     'canRegister' => Features::enabled(Features::registration()),
 // ])->name('home');
 
-Route::inertia('/', 'login', [
+Route::inertia('/', 'auth/login', [
     'canRegister' => Features::enabled(Features::registration()),
 ])->name('home');
 
