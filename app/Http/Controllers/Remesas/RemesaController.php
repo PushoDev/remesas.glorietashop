@@ -17,7 +17,7 @@ class RemesaController extends Controller
 {
     public function index(Request $request): Response
     {
-        $remesas = Remesa::with(['cliente', 'mensajero'])
+        $remesas = Remesa::with(['cliente', 'mensajero:id,nombre,telefono'])
             ->when($request->search, function ($query, $search) {
                 $query->whereHas('cliente', function ($q) use ($search) {
                     $q->where('nombre', 'like', "%{$search}%");

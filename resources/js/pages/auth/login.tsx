@@ -99,7 +99,7 @@ export default function Login({
                         {canRegister && (
                             <div className="text-center text-sm text-muted-foreground">
                                 {/* ¿No tienes una cuenta?{' '} */}
-                                Proyecto de Agencia
+                                Proyecto de Agencia {' '}
                                 <TextLink href={'https://posglorietashop.com'} tabIndex={5}>
                                     La GlorietaShop
                                 </TextLink>

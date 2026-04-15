@@ -7,7 +7,10 @@ import {
     CheckCircle,
     Clock,
     Search,
+    MessageSquare,
 } from 'lucide-react';
+import { useState } from 'react';
+import { RemesaWhatsAppDialog } from '@/components/remesas/whatsapp-dialog';
 import remesas from '@/routes/remesas';
 
 export default function RemesasIndex({
@@ -19,6 +22,7 @@ export default function RemesasIndex({
             id: number;
             nombre_beneficiario: string;
             telefono_beneficiario: string;
+            direccion_beneficiario: string | null;
             moneda_envio: string;
             metodo_pago: string;
             cantidad_recibir: string;
@@ -29,7 +33,7 @@ export default function RemesasIndex({
             entregado: boolean;
             created_at: string;
             cliente: { id: number; nombre: string };
-            mensajero: { id: number; nombre: string };
+            mensajero: { id: number; nombre: string; telefono: string };
         }>;
         links: Array<{ url: string | null; label: string; active: boolean }>;
         current_page: number;
@@ -39,6 +43,11 @@ export default function RemesasIndex({
     };
     filters: { search?: string; estado?: string };
 }) {
+    const [whatsappDialog, setWhatsappDialog] = useState<{
+        open: boolean;
+        remesa: (typeof remesaList.data)[0] | null;
+    }>({ open: false, remesa: null });
+
     return (
         <>
             <Head title="Remesas" />
@@ -197,6 +206,21 @@ export default function RemesasIndex({
                                 </div>
 
                                 <div className="mt-6 flex flex-wrap gap-2">
+                                    {!remesa.entregado && (
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                setWhatsappDialog({
+                                                    open: true,
+                                                    remesa,
+                                                })
+                                            }
+                                            className="flex items-center gap-2 rounded-md border border-green-500 bg-green-50 px-3 py-2 text-sm font-medium text-green-600 hover:bg-green-100"
+                                        >
+                                            <MessageSquare className="h-4 w-4" />
+                                            Contactar Mensajero
+                                        </button>
+                                    )}
                                     {remesa.entregado ? (
                                         <button
                                             disabled
@@ -291,6 +315,16 @@ export default function RemesasIndex({
                             ),
                         )}
                     </div>
+                )}
+
+                {whatsappDialog.remesa && (
+                    <RemesaWhatsAppDialog
+                        open={whatsappDialog.open}
+                        onOpenChange={(open) =>
+                            setWhatsappDialog((prev) => ({ ...prev, open }))
+                        }
+                        remesa={whatsappDialog.remesa}
+                    />
                 )}
             </div>
         </>
